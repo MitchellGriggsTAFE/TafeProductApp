@@ -28,6 +28,9 @@ namespace ProductApps
         // Added Constant Decimal for Wrap Charge
         const decimal WRAP_CHARGE = 5m;
 
+        // Added Constant Decimal for Wrap Charge
+        const decimal GST_CHARGE = 0.1m;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +53,11 @@ namespace ProductApps
                 // Calculate and display the total charge including wrap
                 decimal totalWrapCharge = totalDeliveryCharge + WRAP_CHARGE;
                 totalWrapChargeTextBlock.Text = totalWrapCharge.ToString("C");
+
+                // Calculate and display the total charge including GST
+                decimal totalGSTCharge = totalWrapCharge + (totalWrapCharge * GST_CHARGE);
+                totalGSTChargeTextBlock.Text = totalGSTCharge.ToString("C");
+
             }
             catch (FormatException)
             {
