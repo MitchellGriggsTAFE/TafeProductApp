@@ -25,6 +25,9 @@ namespace ProductApps
         // Added Constant Decimal for Delivery Charge
         const decimal DELIVERY_CHARGE = 25m;
 
+        // Added Constant Decimal for Wrap Charge
+        const decimal WRAP_CHARGE = 5m;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,8 +44,12 @@ namespace ProductApps
                 totalPaymentTextBlock.Text = Convert.ToString(cProduct.TotalPayment);
 
                 // Calculate and display the total charge including delivery
-                decimal totalCharge = cProduct.TotalPayment + DELIVERY_CHARGE;
-                totalChargeTextBlock.Text = totalCharge.ToString("C");
+                decimal totalDeliveryCharge = cProduct.TotalPayment + DELIVERY_CHARGE;
+                totalDeliveryChargeTextBlock.Text = totalDeliveryCharge.ToString("C");
+
+                // Calculate and display the total charge including wrap
+                decimal totalWrapCharge = totalDeliveryCharge + WRAP_CHARGE;
+                totalWrapChargeTextBlock.Text = totalWrapCharge.ToString("C");
             }
             catch (FormatException)
             {
@@ -56,7 +63,8 @@ namespace ProductApps
             priceTextBox.Text = "";
             quantityTextBox.Text = "";
             totalPaymentTextBlock.Text = "";
-            totalChargeTextBlock.Text = "";
+            totalDeliveryChargeTextBlock.Text = "";
+            totalWrapChargeTextBlock.Text = "";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
