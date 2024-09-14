@@ -22,6 +22,9 @@ namespace ProductApps
     {
         Product cProduct;
 
+        // Added Constant Decimal for Delivery Charge
+        const decimal DELIVERY_CHARGE = 25m;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +36,13 @@ namespace ProductApps
             {
                 cProduct = new Product(Convert.ToDecimal(priceTextBox.Text), Convert.ToInt16(quantityTextBox.Text));
                 cProduct.calTotalPayment();
+
+                // Output the total payment
                 totalPaymentTextBlock.Text = Convert.ToString(cProduct.TotalPayment);
+
+                // Calculate and display the total charge including delivery
+                decimal totalCharge = cProduct.TotalPayment + DELIVERY_CHARGE;
+                totalChargeTextBlock.Text = totalCharge.ToString("C");
             }
             catch (FormatException)
             {
@@ -47,6 +56,7 @@ namespace ProductApps
             priceTextBox.Text = "";
             quantityTextBox.Text = "";
             totalPaymentTextBlock.Text = "";
+            totalChargeTextBlock.Text = "";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
